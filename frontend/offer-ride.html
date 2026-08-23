@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Offer a Ride | Secure Carpooling</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                🚗 SecureCarpool
+            </div>
+
+            <a href="dashboard.html" class="login-btn">
+                ← Dashboard
+            </a>
+
+        </nav>
+    </header>
+
+
+    <!-- Offer Ride Page -->
+
+    <main class="ride-page">
+
+        <div class="ride-heading">
+
+            <p class="small-title">
+                SHARE YOUR JOURNEY
+            </p>
+
+            <h1>
+                Offer a Ride
+            </h1>
+
+            <p>
+                Enter your journey details and help passengers
+                travelling in the same direction.
+            </p>
+
+        </div>
+
+
+        <!-- Ride Form -->
+
+        <section class="search-box">
+
+            <form>
+
+                <div class="form-group">
+
+                    <label>Starting Location</label>
+
+                    <input
+                        type="text"
+                        placeholder="Enter starting location"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Destination</label>
+
+                    <input
+                        type="text"
+                        placeholder="Enter destination"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Travel Date</label>
+
+                    <input
+                        type="date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Departure Time</label>
+
+                    <input
+                        type="time"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Available Seats</label>
+
+                    <select required>
+
+                        <option value="">
+                            Select seats
+                        </option>
+
+                        <option value="1">
+                            1 Seat
+                        </option>
+
+                        <option value="2">
+                            2 Seats
+                        </option>
+
+                        <option value="3">
+                            3 Seats
+                        </option>
+
+                        <option value="4">
+                            4 Seats
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Cost Per Passenger</label>
+
+                    <input
+                        type="number"
+                        placeholder="Enter amount in ₹"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Vehicle Type</label>
+
+                    <select required>
+
+                        <option value="">
+                            Select vehicle
+                        </option>
+
+                        <option value="car">
+                            Car
+                        </option>
+
+                        <option value="suv">
+                            SUV
+                        </option>
+
+                        <option value="sedan">
+                            Sedan
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Vehicle Number</label>
+
+                    <input
+                        type="text"
+                        placeholder="Enter vehicle number"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Additional Notes</label>
+
+                    <input
+                        type="text"
+                        placeholder="Any additional information"
+                    >
+
+                </div>
+
+
+                <button type="submit" class="search-btn">
+                    🚗 Publish Ride
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Secure Carpooling System.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

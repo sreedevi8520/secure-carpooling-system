@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>My Bookings | Secure Carpooling</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+
+```
+    <div class="logo">
+        🚗 SecureCarpool
+    </div>
+
+    <a href="dashboard.html" class="login-btn">
+        ← Dashboard
+    </a>
+
+</nav>
+```
+
+</header>
+
+<main class="container">
+
+```
+<section class="page-header">
+
+    <h1>My Bookings</h1>
+
+    <p>
+        View and manage your carpooling reservations.
+    </p>
+
+</section>
+
+
+<section>
+
+    <div id="loading">
+        Loading your bookings...
+    </div>
+
+    <div id="error-message" style="display:none;">
+    </div>
+
+    <div id="bookings-container">
+    </div>
+
+</section>
+```
+
+</main>
+
+<script>
+
+const API_URL = "http://localhost:8080/api/bookings/passenger/1";
+
+const bookingsContainer =
+    document.getElementById("bookings-container");
+
+const loading =
+    document.getElementById("loading");
+
+const errorMessage =
+    document.getElementById("error-message");
+
+
+async function loadBookings() {
+
+    try {
+
+        loading.style.display = "block";
+        errorMessage.style.display = "none";
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Failed to load bookings");
+        }
+
+        const bookings = await response.json();
+
+        loading.style.display = "none";
+
+        displayBookings(bookings);
+
+    } catch (error) {
+
+        loading.style.display = "none";
+
+        errorMessage.style.display = "block";
+
+        errorMessage.innerHTML = `
+            <div class="dashboard-card">
+                <h3>Unable to load bookings</h3>
+                <p>
+                    Please make sure the Spring Boot backend
+                    is running on port 8080.
+                </p>
+            </div>
+        `;
+
+        console.error(error);
+    }
+}
+
+
+function displayBookings(bookings) {
+
+    bookingsContainer.innerHTML = "";
+
+    if (!bookings || bookings.length === 0) {
+
+        bookingsContainer.innerHTML = `
+            <div class="dashboard-card">
+                <h3>No bookings found</h3>
+                <p>
+                    You haven't booked any rides yet.
+                </p>
+
+                <a href="find-ride.html" class="primary-btn">
+                    Find a Ride
+                </a>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    bookings.forEach(booking => {
+
+        const bookingCard =
+            document.createElement("div");
+
+        bookingCard.className = "dashboard-card";
+
+        bookingCard.innerHTML = `
+
+            <div class="ride-details">
+
+                <div>
+                    <strong>🚗 Ride ID</strong>
+                    <span>${booking.rideId}</span>
+                </div>
+
+                <div>
+                    <strong>💺 Seats Booked</strong>
+                    <span>${booking.seatsBooked}</span>
+                </div>
+
+            </div>
+
+
+            <div class="booking-info">
+
+                <p>
+                    <strong>Booking ID:</strong>
+                    ${booking.bookingId}
+                </p>
+
+                <p>
+                    <strong>Passenger ID:</strong>
+                    ${booking.passengerId}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status-confirmed">
+                        ${booking.bookingStatus}
+                    </span>
+                </p>
+
+                <p>
+                    <strong>📅 Booking Date:</strong>
+                    ${formatDate(booking.bookingDate)}
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="cancelBooking(${booking.bookingId})">
+
+                Cancel Booking
+
+            </button>
+
+        `;
+
+        bookingsContainer.appendChild(bookingCard);
+
+    });
+}
+
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+        return "Not available";
+    }
+
+    const date = new Date(dateString);
+
+    return date.toLocaleString("en-IN", {
+        dateStyle: "medium",
+        timeStyle: "short"
+    });
+}
+
+
+async function cancelBooking(bookingId) {
+
+    const confirmed =
+        confirm("Are you sure you want to cancel this booking?");
+
+    if (!confirmed) {
+        return;
+    }
+
+    alert(
+        "Cancellation API is not implemented yet. " +
+        "Your booking is still confirmed."
+    );
+}
+
+
+loadBookings();
+
+</script>
+
+</body>
+</html>
